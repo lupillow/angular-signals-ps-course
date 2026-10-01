@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import type { Product } from '../product';
 import { ProductData } from '../product-data';
 
 @Component({
@@ -11,6 +12,7 @@ import { ProductData } from '../product-data';
 export class ProductSelection {
   pageTitle = 'Product Selection';
 
+  selectedProduct = signal<Product | undefined>(undefined);
   quantity = signal(1);
   products = signal(ProductData.products);
 }
