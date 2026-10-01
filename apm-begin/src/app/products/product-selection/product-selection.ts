@@ -18,12 +18,14 @@ export class ProductSelection {
   selectedProduct = signal<Product | undefined>(undefined);
   quantity = linkedSignal({
     source: this.selectedProduct,
-    computation: p => 1,
+    computation: (p) => 1,
   });
-  products = this.productService.productsResource.value;
+
+  productsResource = this.productService.createProducts();
+  products = this.productsResource.value;
 
   total = computed(() => (this.selectedProduct()?.price ?? 0) * this.quantity());
-  color = computed(() => this.total() > 200 ? 'red' : 'green');
+  color = computed(() => (this.total() > 200 ? 'red' : 'green'));
 
   onIncrease() {
     this.quantity.update((q) => q + 1);
