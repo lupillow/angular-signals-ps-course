@@ -21,8 +21,10 @@ export class ProductSelection {
     computation: (p) => 1,
   });
 
-  productsResource = this.productService.createProducts();
-  products = this.productsResource.value;
+  products = this.productService.productsResource.value;
+  isLoading = this.productService.productsResource.isLoading;
+  error = this.productService.productsResource.error;
+  errorMessage = computed(() => this.error() ? this.error()?.message : "");
 
   total = computed(() => (this.selectedProduct()?.price ?? 0) * this.quantity());
   color = computed(() => (this.total() > 200 ? 'red' : 'green'));

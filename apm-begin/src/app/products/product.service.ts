@@ -8,9 +8,5 @@ import type { Product } from './product';
 export class ProductService {
   private productsUrl = 'api/products';
 
-  // productsResource = httpResource<Product[]>(() => this.productsUrl, { defaultValue: [] });
-
-  createProducts() {
-    return httpResource<Product[]>(() => this.productsUrl, { defaultValue: [] });
-  }
+  productsResource = httpResource<Product[]>(() => this.productsUrl, { defaultValue: [] });
 }
