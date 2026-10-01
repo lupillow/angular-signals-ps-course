@@ -1,5 +1,5 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, computed, effect, signal } from '@angular/core';
+import { Component, computed, effect, linkedSignal, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import type { Product } from '../product';
 import { ProductData } from '../product-data';
@@ -14,7 +14,10 @@ export class ProductSelection {
   pageTitle = 'Product Selection';
 
   selectedProduct = signal<Product | undefined>(undefined);
-  quantity = signal(1);
+  quantity = linkedSignal({
+    source: this.selectedProduct,
+    computation: p => 1,
+  });
   products = signal(ProductData.products);
 
   total = computed(() => (this.selectedProduct()?.price ?? 0) * this.quantity());
