@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ReviewService } from '../review.service';
 
 @Component({
   selector: 'app-review-list',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrl: './review-list.css'
 })
 export class ReviewList {
+  private  reviewService = inject(ReviewService);
 
+  reviews = this.reviewService.reviewsResource.value;
+  isLoading = this.reviewService.reviewsResource.isLoading;
+  error = this.reviewService.reviewsResource.error;
+  errorMessage = this.reviewService.reviewsResource.error()?.message;
 }
